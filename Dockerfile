@@ -13,5 +13,5 @@ RUN wget https://github.com/neovim/neovim/archive/refs/heads/master.zip && unzip
 
 RUN curl https://gitee.com/RunningIkkyu/retry/raw/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry
 
-RUN cd neovim-master && retry -s 1 -t 10 make CMAKE_BUILD_TYPE=Release
+RUN cd neovim-master && make CMAKE_BUILD_TYPE=Release
 
