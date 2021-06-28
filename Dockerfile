@@ -11,12 +11,12 @@ RUN apk add --no-cache ripgrep
 RUN apk add --no-cache tmux 
 RUN apk add --no-cache openssh
 RUN apk add --no-cache perl
-#RUN apk add --no-cache tree-sitter --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
-#RUN apk add --no-cache luajit --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
+RUN apk add --no-cache tree-sitter --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
+RUN apk add --no-cache luajit --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
 RUN apk add --no-cache git build-base cmake automake autoconf libtool pkgconf coreutils curl unzip gettext-tiny-dev 
 RUN wget https://github.com/neovim/neovim/archive/refs/heads/master.zip && unzip master.zip
 #RUN cd neovim-master && make CMAKE_BUILD_TYPE=Release 
-RUN cd neovim-master && make CMAKE_BUILD_TYPE=RelWithDebInfo && make install
+RUN cd neovim-master && make CMAKE_BUILD_TYPE=RelWithDebInfo && make install && cd .. && rm -rf neovim-master
 
 #COPY nvim /usr/bin/nvim
 
@@ -24,7 +24,7 @@ RUN cd neovim-master && make CMAKE_BUILD_TYPE=RelWithDebInfo && make install
 RUN wget https://gitee.com/umico/ohmyzsh/raw/master/tools/install.sh -O - | zsh || true 
 
 # Install nvim arm64
-COPY ./nvim /usr/bin/nvim
+# COPY ./nvim /usr/bin/nvim
 
 # Downlaod dotfiles
 RUN cd /root
